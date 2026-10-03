@@ -1,0 +1,162 @@
+<div class="love-question">
+  <h2>Sence birbirimizi kim daha çok seviyor?</h2>
+
+  <div class="buttons">
+    <button id="aysima">Aysima</button>
+    <button id="ugur">Uğur</button>
+  </div>
+
+  <p id="answer"></p>
+</div>
+
+<div class="hearts"></div>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #0d0d0d;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.love-question {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.love-question h2 {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 35px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  position: relative;
+}
+
+.buttons button {
+  border: 1px solid #e88aa8;
+  background: transparent;
+  color: white;
+  padding: 13px 35px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#aysima:hover {
+  background: #e88aa8;
+  color: #111;
+}
+
+#ugur {
+  position: relative;
+}
+
+#answer {
+  margin-top: 30px;
+  color: #e88aa8;
+  font-size: 19px;
+}
+
+/* Arka plandaki kalpler */
+
+.hearts {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -30px;
+  width: 14px;
+  height: 14px;
+  background: #e88aa8;
+  transform: rotate(45deg);
+  opacity: 0.25;
+  animation: float 8s linear infinite;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #e88aa8;
+  border-radius: 50%;
+}
+
+.heart::before {
+  left: -7px;
+}
+
+.heart::after {
+  top: -7px;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(45deg);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.25;
+  }
+
+  85% {
+    opacity: 0.25;
+  }
+
+  100% {
+    transform: translateY(-110vh) rotate(45deg);
+    opacity: 0;
+  }
+}
+</style>
+
+<script>
+const hearts = document.querySelector(".hearts");
+
+for (let i = 0; i < 25; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.animationDelay = Math.random() * 8 + "s";
+  heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+  heart.style.transform = `scale(${0.5 + Math.random()}) rotate(45deg)`;
+
+  hearts.appendChild(heart);
+}
+
+const ugur = document.getElementById("ugur");
+const aysima = document.getElementById("aysima");
+const answer = document.getElementById("answer");
+
+ugur.addEventListener("mouseenter", () => {
+  const x = Math.random() * 300 - 150;
+  const y = Math.random() * 180 - 90;
+
+  ugur.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+aysima.addEventListener("click", () => {
+  answer.textContent = "Doğru cevap. Aysima.";
+});
+</script>
